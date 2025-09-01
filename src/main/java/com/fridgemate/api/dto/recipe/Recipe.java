@@ -42,5 +42,6 @@ public class Recipe {
 
     public PartialOrder.PartialComparable getScore() {
 
+        return null;
     }
 }

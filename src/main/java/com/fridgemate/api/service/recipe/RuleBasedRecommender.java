@@ -138,8 +138,9 @@ public class RuleBasedRecommender implements Recommender {
         return ingredients.stream()
                 .map(ingredient -> new RecipeIngredient(
                     ingredient.getName(),
-                    //ingredient.getAmount().multiply(multiplier),
-                    ingredient.getUnit()
+                    ingredient.getAmount(),
+                    ingredient.getUnit(),
+                        true
                 ))
                 .collect(Collectors.toList());
     }
