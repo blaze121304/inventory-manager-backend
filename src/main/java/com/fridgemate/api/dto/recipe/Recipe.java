@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.util.PartialOrder;
 
 import java.util.List;
 
@@ -38,4 +39,8 @@ public class Recipe {
 
     @Schema(description = "조리 과정")
     private List<String> instructions;
+
+    public PartialOrder.PartialComparable getScore() {
+
+    }
 }

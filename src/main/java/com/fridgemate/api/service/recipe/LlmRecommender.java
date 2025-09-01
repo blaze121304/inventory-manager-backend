@@ -124,5 +124,6 @@ public class LlmRecommender implements Recommender {
 //        defaultRecipe.setEstimatedTimeMin(0);
 //
 //        return Arrays.asList(defaultRecipe);
+        return null;
     }
 }

@@ -93,7 +93,7 @@ public class RuleBasedRecommender implements Recommender {
             String ingredientName = ingredient.getName().toLowerCase().trim();
             Item availableItem = availableItems.get(ingredientName);
 
-            if (availableItem != null && availableItem.getQuantity().compareTo(ingredient.getAmount()) >= 0) {
+            if (availableItem != null && availableItem.getQuantity().compareTo(BigDecimal.valueOf(Integer.parseInt(ingredient.getAmount()))) >= 0) {
                 // 보유 재료
                 usedIngredients.add(ingredient);
                 availableIngredientCount++;
@@ -123,21 +123,22 @@ public class RuleBasedRecommender implements Recommender {
             missingIngredients = adjustIngredientAmounts(missingIngredients, servingMultiplier);
         }
 
-        return new Recipe(
-            template.getTitle(),
-            totalScore,
-            usedIngredients,
-            missingIngredients,
-            template.getSteps(),
-            template.getEstimatedTimeMin()
-        );
+//        return new Recipe(
+//            template.getTitle(),
+//            totalScore,
+//            usedIngredients,
+//            missingIngredients,
+//            template.getSteps(),
+//            template.getEstimatedTimeMin()
+//        );
+        return null;
     }
 
     private List<RecipeIngredient> adjustIngredientAmounts(List<RecipeIngredient> ingredients, BigDecimal multiplier) {
         return ingredients.stream()
                 .map(ingredient -> new RecipeIngredient(
                     ingredient.getName(),
-                    ingredient.getAmount().multiply(multiplier),
+                    //ingredient.getAmount().multiply(multiplier),
                     ingredient.getUnit()
                 ))
                 .collect(Collectors.toList());
@@ -161,7 +162,7 @@ public class RuleBasedRecommender implements Recommender {
         
         public List<String> getSteps() { return steps; }
         public void setSteps(List<String> steps) { this.steps = steps; }
-        
+
         public Integer getEstimatedTimeMin() { return estimatedTimeMin; }
         public void setEstimatedTimeMin(Integer estimatedTimeMin) { this.estimatedTimeMin = estimatedTimeMin; }
         
