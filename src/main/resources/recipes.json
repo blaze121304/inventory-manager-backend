@@ -1,0 +1,182 @@
+[
+  {
+    "title": "계란볶음밥",
+    "ingredients": [
+      {"name": "계란", "amount": 2, "unit": "개"},
+      {"name": "밥", "amount": 1, "unit": "공기"},
+      {"name": "대파", "amount": 0.5, "unit": "줄기"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"},
+      {"name": "간장", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "팬에 식용유를 두르고 중불에서 달군다",
+      "계란을 풀어서 스크램블을 만든다",
+      "밥을 넣고 계란과 잘 섞는다",
+      "대파와 간장을 넣고 볶아준다",
+      "기호에 따라 소금, 후추로 간을 맞춘다"
+    ],
+    "estimatedTimeMin": 15,
+    "category": "밥류",
+    "diet": "일반"
+  },
+  {
+    "title": "닭가슴살 샐러드",
+    "ingredients": [
+      {"name": "닭가슴살", "amount": 200, "unit": "g"},
+      {"name": "양파", "amount": 0.5, "unit": "개"},
+      {"name": "당근", "amount": 1, "unit": "개"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "닭가슴살을 한입 크기로 자른다",
+      "양파와 당근을 채썬다",
+      "팬에 기름을 두르고 닭가슴살을 익힌다",
+      "익힌 닭가슴살과 채소를 섞는다",
+      "드레싱을 뿌려 완성한다"
+    ],
+    "estimatedTimeMin": 20,
+    "category": "샐러드",
+    "diet": "고단백"
+  },
+  {
+    "title": "우유계란찜",
+    "ingredients": [
+      {"name": "계란", "amount": 3, "unit": "개"},
+      {"name": "우유", "amount": 200, "unit": "ml"}
+    ],
+    "steps": [
+      "계란을 잘 풀어준다",
+      "우유를 넣고 잘 섞는다",
+      "체에 거른 후 찜기에 넣는다",
+      "15분간 쪄서 완성한다"
+    ],
+    "estimatedTimeMin": 20,
+    "category": "찜류",
+    "diet": "일반"
+  },
+  {
+    "title": "양파볶음",
+    "ingredients": [
+      {"name": "양파", "amount": 2, "unit": "개"},
+      {"name": "식용油", "amount": 2, "unit": "큰술"},
+      {"name": "간장", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "양파를 채썬다",
+      "팬에 기름을 두르고 양파를 볶는다",
+      "양파가 투명해지면 간장으로 간을 한다",
+      "노릇해질 때까지 볶아준다"
+    ],
+    "estimatedTimeMin": 10,
+    "category": "반찬",
+    "diet": "채식"
+  },
+  {
+    "title": "당근볶음",
+    "ingredients": [
+      {"name": "당근", "amount": 3, "unit": "개"},
+      {"name": "마늘", "amount": 2, "unit": "쪽"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "당근을 채썬다",
+      "마늘을 다진다",
+      "팬에 기름을 두르고 마늘을 볶는다",
+      "당근을 넣고 볶아준다",
+      "소금으로 간을 맞춘다"
+    ],
+    "estimatedTimeMin": 12,
+    "category": "반찬",
+    "diet": "채식"
+  },
+  {
+    "title": "간단 오믈렛",
+    "ingredients": [
+      {"name": "계란", "amount": 3, "unit": "개"},
+      {"name": "우유", "amount": 2, "unit": "큰술"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "계란에 우유를 넣고 잘 젓는다",
+      "팬에 기름을 두르고 계란물을 부어 익힌다",
+      "반으로 접어서 완성한다"
+    ],
+    "estimatedTimeMin": 8,
+    "category": "계란요리",
+    "diet": "일반"
+  },
+  {
+    "title": "마늘볶음밥",
+    "ingredients": [
+      {"name": "밥", "amount": 2, "unit": "공기"},
+      {"name": "마늘", "amount": 5, "unit": "쪽"},
+      {"name": "대파", "amount": 1, "unit": "줄기"},
+      {"name": "식용유", "amount": 2, "unit": "큰술"},
+      {"name": "간장", "amount": 2, "unit": "큰술"}
+    ],
+    "steps": [
+      "마늘을 다지고 대파를 썬다",
+      "팬에 기름을 두르고 마늘을 볶는다",
+      "밥을 넣고 볶는다",
+      "대파와 간장을 넣고 볶아준다"
+    ],
+    "estimatedTimeMin": 15,
+    "category": "밥류",
+    "diet": "일반"
+  },
+  {
+    "title": "채소볶음",
+    "ingredients": [
+      {"name": "양파", "amount": 1, "unit": "개"},
+      {"name": "당근", "amount": 2, "unit": "개"},
+      {"name": "대파", "amount": 1, "unit": "줄기"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "모든 채소를 썬다",
+      "팬에 기름을 두르고 양파부터 볶는다",
+      "당근을 넣고 볶는다",
+      "대파를 넣고 마저 볶아준다",
+      "소금, 후추로 간을 맞춘다"
+    ],
+    "estimatedTimeMin": 15,
+    "category": "반찬",
+    "diet": "채식"
+  },
+  {
+    "title": "닭가슴살볶음",
+    "ingredients": [
+      {"name": "닭가슴살", "amount": 300, "unit": "g"},
+      {"name": "양파", "amount": 1, "unit": "개"},
+      {"name": "마늘", "amount": 3, "unit": "쪽"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "닭가슴살을 한입 크기로 자른다",
+      "양파와 마늘을 썬다",
+      "팬에 기름을 두르고 닭가슴살을 볶는다",
+      "양파와 마늘을 넣고 함께 볶는다",
+      "간장이나 소금으로 간을 맞춘다"
+    ],
+    "estimatedTimeMin": 18,
+    "category": "메인요리",
+    "diet": "고단백"
+  },
+  {
+    "title": "우유 스크램블",
+    "ingredients": [
+      {"name": "계란", "amount": 4, "unit": "개"},
+      {"name": "우유", "amount": 100, "unit": "ml"},
+      {"name": "식용유", "amount": 1, "unit": "큰술"}
+    ],
+    "steps": [
+      "계란에 우유를 넣고 잘 젓는다",
+      "팬에 기름을 두르고 약불에 올린다",
+      "계란물을 붓고 천천히 저어가며 익힌다",
+      "부드럽게 익으면 완성"
+    ],
+    "estimatedTimeMin": 10,
+    "category": "계란요리",
+    "diet": "일반"
+  }
+]

@@ -1,0 +1,176 @@
+package com.fridgemate.api.service;
+
+import com.fridgemate.api.domain.Item;
+import com.fridgemate.api.dto.ConsumeReq;
+import com.fridgemate.api.dto.ItemCreateReq;
+import com.fridgemate.api.dto.ItemResp;
+import com.fridgemate.api.dto.ItemUpdateReq;
+import com.fridgemate.api.exception.ItemNotFoundException;
+import com.fridgemate.api.repository.ItemRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+@Transactional(readOnly = true)
+public class ItemService {
+
+    private final ItemRepository itemRepository;
+
+    /**
+     * 재고 목록 조회 (검색/정렬/필터 지원)
+     */
+    public List<ItemResp> getItems(String keyword, String category, String location, 
+                                   Integer expiring, String sortBy, String sortDir) {
+        Sort sort = createSort(sortBy, sortDir);
+        
+        List<Item> items;
+        
+        // 검색 조건이 있는 경우
+        if (StringUtils.hasText(keyword) || StringUtils.hasText(category) || 
+            StringUtils.hasText(location) || expiring != null) {
+            
+            LocalDate expiringDate = expiring != null ? LocalDate.now().plusDays(expiring) : null;
+            items = itemRepository.findBySearchCriteria(keyword, category, location, expiring, expiringDate, sort);
+        } else { ci
+            items = itemRepository.findAll(sort);
+        }
+        
+        return items.stream()
+                .map(ItemResp::from)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 재고 단건 조회
+     */
+    public ItemResp getItem(Long id) {
+        Item item = findItemById(id);
+        return ItemResp.from(item);
+    }
+
+    /**
+     * 재고 생성
+     */
+    @Transactional
+    public ItemResp createItem(ItemCreateReq request) {
+        Item item = new Item();
+        item.setName(request.getName());
+        item.setQuantity(request.getQuantity());
+        item.setUnit(request.getUnit());
+        item.setExpiryDate(request.getExpiryDate());
+        item.setCategory(request.getCategory());
+        item.setLocation(request.getLocation());
+        item.setMemo(request.getMemo());
+        
+        Item savedItem = itemRepository.save(item);
+        log.info("새 재고 아이템 생성: {}", savedItem.getName());
+        
+        return ItemResp.from(savedItem);
+    }
+
+    /**
+     * 재고 수정
+     */
+    @Transactional
+    public ItemResp updateItem(Long id, ItemUpdateReq request) {
+        Item item = findItemById(id);
+        
+        item.setName(request.getName());
+        item.setQuantity(request.getQuantity());
+        item.setUnit(request.getUnit());
+        item.setExpiryDate(request.getExpiryDate());
+        item.setCategory(request.getCategory());
+        item.setLocation(request.getLocation());
+        item.setMemo(request.getMemo());
+        
+        Item updatedItem = itemRepository.save(item);
+        log.info("재고 아이템 수정: {}", updatedItem.getName());
+        
+        return ItemResp.from(updatedItem);
+    }
+
+    /**
+     * 재고 삭제
+     */
+    @Transactional
+    public void deleteItem(Long id) {
+        Item item = findItemById(id);
+        itemRepository.delete(item);
+        log.info("재고 아이템 삭제: {}", item.getName());
+    }
+
+    /**
+     * 재고 소비 (수량 감소)
+     */
+    @Transactional
+    public ItemResp consumeItem(Long id, ConsumeReq request) {
+        Item item = findItemById(id);
+        
+        try {
+            item.consume(request.getAmount());
+            Item updatedItem = itemRepository.save(item);
+            log.info("재고 소비: {} - {}{}만큼 소비", item.getName(), request.getAmount(), item.getUnit());
+            
+            return ItemResp.from(updatedItem);
+        } catch (IllegalArgumentException e) {
+            log.error("재고 소비 실패: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * 유통기한 임박 상품 조회
+     */
+    public List<ItemResp> getExpiringItems(int days) {
+        LocalDate targetDate = LocalDate.now().plusDays(days);
+        List<Item> items = itemRepository.findExpiringItems(targetDate);
+        
+        return items.stream()
+                .map(ItemResp::from)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 재고가 있는 아이템 조회 (레시피 추천용)
+     */
+    public List<Item> getAvailableItems() {
+        return itemRepository.findAvailableItems();
+    }
+
+    /**
+     * 카테고리 목록 조회
+     */
+    public List<String> getCategories() {
+        return itemRepository.findDistinctCategories();
+    }
+
+    /**
+     * 보관 위치 목록 조회
+     */
+    public List<String> getLocations() {
+        return itemRepository.findDistinctLocations();
+    }
+
+    private Item findItemById(Long id) {
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException("재고 아이템을 찾을 수 없습니다. ID: " + id));
+    }
+
+    private Sort createSort(String sortBy, String sortDir) {
+        String field = StringUtils.hasText(sortBy) ? sortBy : "updatedAt";
+        Sort.Direction direction = "asc".equalsIgnoreCase(sortDir) ? 
+                Sort.Direction.ASC : Sort.Direction.DESC;
+        
+        return Sort.by(direction, field);
+    }
+}
